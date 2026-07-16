@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-            
+                
     
-    <wb-module deploy-name="WebProject">
-                        
+    
+    <wb-module deploy-name="WebProjectJS">
+                                
+        
         
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+                
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
-                        
+                                
         
-        <property name="context-root" value="WebProject"/>
-                        
         
-        <property name="java-output-path" value="/WebProject/build/classes"/>
-                    
+        <property name="java-output-path" value="/WebProjectJS/build/classes"/>
+        <property name="context-root" value="WebProjectJS"/>
+                            
+    
     
     </wb-module>
-        
+            
+
 
 </project-modules>
