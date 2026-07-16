@@ -28,4 +28,10 @@ public class DatabaseManager {
             throw new SQLException("Impossibile trovare la DataSource JNDI", e);
         }
     }
+    
+	public static void closeConnection(Connection connection) throws SQLException {
+		if (connection != null) {
+			connection.close();
+		}
+	}
 }

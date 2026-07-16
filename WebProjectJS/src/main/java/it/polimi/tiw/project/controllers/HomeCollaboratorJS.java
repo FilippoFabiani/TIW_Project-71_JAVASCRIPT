@@ -43,8 +43,9 @@ public class HomeCollaboratorJS extends MyServlet {
 			return;
 		}
 
-		WebContext ctx = new WebContext(application.buildExchange(request, response), request.getLocale());
-		response.setContentType("text/html;charset=UTF-8");
-		templateEngine.process("homeCollaboratorJS", ctx, response.getWriter());
-	}
+        response.setContentType("text/html;charset=UTF-8");
+        request.getRequestDispatcher("/WEB-INF/templates/homeCollaboratorJS.html")
+               .forward(request, response);
+    }
+	
 }

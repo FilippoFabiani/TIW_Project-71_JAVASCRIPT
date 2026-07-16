@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="it" xmlns:th="http://www.thymeleaf.org">
+<html lang="it">
 <head>
     <meta charset="UTF-8">
     <title>Home Collaboratore</title>
-    <link rel="stylesheet" th:href="@{/global.css}" />
+    <link rel="stylesheet" href="global.css" />
     <style>
         body { margin: 1.5rem; }
         nav { margin-bottom: 0.5rem; }
@@ -30,7 +30,7 @@
 
     <nav>
         <!-- La HOME COLLABORATORE e' un'unica pagina: l'unico link richiesto e' il LOGOUT. -->
-        <a th:href="@{/login}">Logout</a>
+        <a href="@{/login}">Logout</a>
     </nav>
 
     <hr>
@@ -51,9 +51,9 @@
     <section id="projectView"></section>
 
     <!-- Context path esposto allo script per costruire le URL delle chiamate asincrone -->
-    <script th:inline="javascript">
-        window.APP_CONTEXT = /*[[@{/}]]*/ '/';
-    </script>
-    <script th:src="@{/js/collaborator.js}"></script>
+    <script>
+    window.APP_CONTEXT = window.location.pathname.replace(/\/homeCollaboratorJS$/, '/');
+</script>
+<script src="js/collaborator.js"></script>
 </body>
 </html>

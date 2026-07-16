@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/TIW_Project-71_JAVASCRIPT.iml" filepath="$PROJECT_DIR$/TIW_Project-71_JAVASCRIPT.iml" />
+      <module fileurl="file://$PROJECT_DIR$/WebProjectJS/WebProjectJS.iml" filepath="$PROJECT_DIR$/WebProjectJS/WebProjectJS.iml" />
+    </modules>
+  </component>
+</project>

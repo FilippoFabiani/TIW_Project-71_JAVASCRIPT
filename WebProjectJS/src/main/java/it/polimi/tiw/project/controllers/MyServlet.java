@@ -12,20 +12,20 @@ import jakarta.servlet.http.HttpServlet;
 
 public abstract class MyServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    protected TemplateEngine templateEngine;
     protected JakartaServletWebApplication application;
 
 
-    @Override
-    public void init() throws ServletException {
-        super.init();
-        this.templateEngine = (TemplateEngine) getServletContext().getAttribute("templateEngine");
-    	this.application = JakartaServletWebApplication.buildApplication(getServletContext());
-
-    }
 
     // Ogni servlet chiama questo dentro doGet/doPost e la chiude in un finally
     protected Connection getConnection() throws SQLException {
         return DatabaseManager.getConnection();
     }
+    
+	public void destroy() {
+		try {
+			DatabaseManager.closeConnection(getConnection());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		}
 }
