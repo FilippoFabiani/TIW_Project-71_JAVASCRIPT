@@ -1,37 +1,46 @@
-/**
- * Login management
- */
+(function () {
+  var loginForm = document.getElementById("loginForm");
+  var choiceBox = document.getElementById("roleChoice");
 
-(function() { // avoid variables ending up in the global scope
-
-  document.getElementById("loginbutton").addEventListener('click', (e) => {
+  document.getElementById("loginbutton").addEventListener('click', function (e) {
     var form = e.target.closest("form");
-    if (form.checkValidity()) {
-      makeCall("POST", 'CheckLogin', e.target.closest("form"),
-        function(x) {
-          if (x.readyState == XMLHttpRequest.DONE) {
-            var message = x.responseText;
-            switch (x.status) {
-              case 200:
-            	sessionStorage.setItem('username', message);
-                window.location.href = "homeCollaboratorJS";
-                break;
-              case 400: // bad request
-                document.getElementById("errormessage").textContent = message;
-                break;
-              case 401: // unauthorized
-                  document.getElementById("errormessage").textContent = message;
-                  break;
-              case 500: // server error
-            	document.getElementById("errormessage").textContent = message;
-                break;
-            }
-          }
-        }
-      );
-    } else {
-    	 form.reportValidity();
-    }
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+
+    makeCall("POST", 'CheckLogin', form, function (req) {
+      if (req.readyState !== XMLHttpRequest.DONE) return;
+      if (req.status === 200) {
+        var data = JSON.parse(req.responseText);
+        sessionStorage.setItem('username', data.username);
+        route(data.position);
+      } else {
+        document.getElementById("errormessage").textContent = req.responseText;
+      }
+    });
   });
 
+  function route(position) {
+    switch (position) {
+      case 'ADMIN':        window.location.href = 'homeAdmin';           break; // nuovo DOM
+      case 'MANAGER':      window.location.href = 'homeManager';         break; // nuovo DOM
+      case 'COLLABORATOR': window.location.href = 'homeCollaboratorJS';  break; // nuovo DOM
+      case 'TECHNICIAN':   showRoleChoice();                             break; // resta, muta il DOM
+      default:
+        document.getElementById("errormessage").textContent = "Ruolo non riconosciuto";
+    }
+  }
+
+  // UNICO caso senza redirect: sia responsabile sia collaboratore -> scelta.
+  function showRoleChoice() {
+    loginForm.style.display = 'none';
+    choiceBox.innerHTML =
+        '<h2>Come vuoi accedere?</h2>' +
+        '<button id="goManager">Home Responsabile</button> ' +
+        '<button id="goCollaborator">Home Collaboratore</button>';
+    choiceBox.style.display = 'block';
+
+    document.getElementById("goManager")
+        .addEventListener('click', function () { window.location.href = 'homeManager'; });
+    document.getElementById("goCollaborator")
+        .addEventListener('click', function () { window.location.href = 'homeCollaboratorJS'; });
+  }
 })();
