@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Context>
+    <Resource name="jdbc/dbProvaTiw"
+              auth="Container"
+              type="javax.sql.DataSource"
+              maxTotal="20"
+              maxIdle="10"
+              minIdle="5"
+              maxWaitMillis="10000"
+              username="root"
+              password="ZVQID91t"
+              driverClassName="com.mysql.cj.jdbc.Driver"
+              url="jdbc:mysql://localhost:3306/dbProvaTiw?serverTimezone=UTC"/>
+</Context>
