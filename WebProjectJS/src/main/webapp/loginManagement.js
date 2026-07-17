@@ -1,6 +1,6 @@
 (function () {
   var loginForm = document.getElementById("loginForm");
-  var choiceBox = document.getElementById("roleChoice");
+  var roleChoice = document.getElementById("roleChoice");
 
   document.getElementById("loginbutton").addEventListener('click', function (e) {
     var form = e.target.closest("form");
@@ -32,11 +32,11 @@
   // UNICO caso senza redirect: sia responsabile sia collaboratore -> scelta.
   function showRoleChoice() {
     loginForm.style.display = 'none';
-    choiceBox.innerHTML =
+    roleChoice.innerHTML =
         '<h2>Come vuoi accedere?</h2>' +
         '<button id="goManager">Home Responsabile</button> ' +
         '<button id="goCollaborator">Home Collaboratore</button>';
-    choiceBox.style.display = 'block';
+    roleChoice.style.display = 'block';
 
     document.getElementById("goManager")
         .addEventListener('click', function () { window.location.href = 'homeManager'; });

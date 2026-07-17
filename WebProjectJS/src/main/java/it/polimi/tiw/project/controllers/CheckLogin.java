@@ -6,6 +6,8 @@ import java.sql.SQLException;
 
 import org.apache.commons.text.StringEscapeUtils;
 
+import com.google.gson.JsonObject;
+
 import it.polimi.tiw.project.beans.User;
 import it.polimi.tiw.project.beans.UserCredential;
 import it.polimi.tiw.project.dao.UserCredentialDAO;
@@ -69,7 +71,13 @@ public class CheckLogin extends MyServlet{
 				response.setStatus(HttpServletResponse.SC_OK);
 				response.setContentType("application/json");
 				response.setCharacterEncoding("UTF-8");
-				response.getWriter().println(usrn);
+				
+				JsonObject jsonResponse = new JsonObject();
+				jsonResponse.addProperty("position", user.getPosition().toString());
+				jsonResponse.addProperty("username", user.getUsername());
+				
+				
+				response.getWriter().println(jsonResponse.toString());
 			}
 			
 			

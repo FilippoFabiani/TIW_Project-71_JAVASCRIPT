@@ -3,18 +3,18 @@
 <head>
 <meta charset="ISO-8859-1"></meta>
 <title>Login page</title>
-<script src="utils.js" charset="utf-8" defer="defer"></script>
-<script src="loginManagement.js" charset="utf-8" defer="defer"></script>
+<script src="utils.js" charset="utf-8" defer></script>
+<script src="loginManagement.js" charset="utf-8" defer></script>
 
 </head>
 <body>
 	<h1>Welcome to the project management application</h1>
 	<div>
-		<form action="#">
+		<form id="loginForm" action="#">
 			<fieldset>
-				Username: <input type="text" name="username" required="required"> </input><br>
-				Password: <input type="password" name="pwd" required= "required"></input></br>
-				<input id="loginbutton" type="button" value="login"></input>
+				Username: <input type="text" name="username" required> <br>
+				Password: <input type="password" name="pwd" required>
+				<input id="loginbutton" type="button" value="login">
 				<p id="errormessage"></p>
 			</fieldset>
 		</form>
