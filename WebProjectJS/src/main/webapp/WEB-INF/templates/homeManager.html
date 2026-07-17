@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Responsabile</title>
+    <link rel="stylesheet" href="global.css" />
+    <style>
+        body { margin: 1.5rem; }
+        header h1 { margin-bottom: 0.25rem; }
+        #mainNav { margin: 0.5rem 0; }
+        #mainNav .nav-btn {
+            margin-right: 0.4rem; padding: 0.4rem 0.8rem; cursor: pointer;
+            border: 1px solid #bbb; background: #f4f4f4; border-radius: 4px;
+        }
+        #mainNav .nav-btn.active { background: #06c; color: #fff; border-color: #06c; }
+        #mainNav a { margin-left: 0.6rem; }
+
+        .view { margin-top: 1rem; }
+        .view .row { margin: 0.5rem 0; }
+        .view .row label { margin-right: 0.3rem; margin-left: 0.8rem; }
+        .view .row label:first-child { margin-left: 0; }
+
+        .actions { margin: 1rem 0; }
+        .actions button {
+            padding: 0.5rem 1rem; margin-right: 0.5rem; cursor: pointer;
+            border: none; border-radius: 4px; color: #fff;
+        }
+        #btn-save { background: #06c; }
+        #btn-assign, #btn-conclude { background: #0a5; }
+
+        table.grid { border-collapse: collapse; margin-top: 0.75rem; }
+        table.grid th, table.grid td { border: 1px solid #ccc; padding: 5px 9px; text-align: center; min-width: 3rem; }
+        table.grid th { background: #f4f4f4; }
+        table.grid .wp-row td { background: #eee; font-weight: bold; text-align: left; }
+        table.grid .task-label { text-align: left; }
+
+        .muted { color: #666; }
+        .msg { min-height: 1.2em; margin-top: 0.6rem; }
+        .msg-ok { color: #14670a; }
+        .msg-err { color: #b00020; font-weight: bold; }
+        #home-detail label { display: inline-block; margin: 0.15rem 0; }
+        #home-detail input[type=number] { width: 4rem; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1 id="greeting">Home Responsabile</h1>
+        <nav id="mainNav">
+            <button type="button" data-view="view-home" class="nav-btn active">Home Responsabile</button>
+            <button type="button" data-view="view-projects" class="nav-btn">Monitoraggio Progetti</button>
+            <button type="button" data-view="view-collaborators" class="nav-btn">Monitoraggio Collaboratori</button>
+            <a id="logoutLink" href="login">Logout</a>
+        </nav>
+    </header>
+
+    <hr>
+
+    <!-- =================== VIEW 1: HOME RESPONSABILE =================== -->
+    <section id="view-home" class="view">
+        <h2>Assegnazione collaboratori e ore previste</h2>
+        <div class="row">
+            <label for="home-project">Progetto:</label>
+            <select id="home-project"><option value="">Seleziona...</option></select>
+            <label for="home-wp">Work Package:</label>
+            <select id="home-wp" disabled><option value="">--</option></select>
+            <label for="home-task">Task:</label>
+            <select id="home-task" disabled><option value="">--</option></select>
+        </div>
+        <p id="home-status" class="muted"></p>
+        <div id="home-detail"></div>
+        <div class="actions" id="home-actions" hidden>
+            <button type="button" id="btn-save">SALVA</button>
+            <button type="button" id="btn-assign">ASSEGNA</button>
+        </div>
+        <p id="home-msg" class="msg"></p>
+    </section>
+
+    <!-- =================== VIEW 2: MONITORAGGIO PROGETTI =================== -->
+    <section id="view-projects" class="view" hidden>
+        <h2>Monitoraggio Progetti</h2>
+        <div class="row">
+            <label for="proj-select">Progetto:</label>
+            <select id="proj-select"><option value="">Seleziona...</option></select>
+        </div>
+        <div id="proj-table"></div>
+        <div class="actions" id="proj-actions" hidden>
+            <button type="button" id="btn-conclude">CONCLUDI</button>
+        </div>
+        <p id="proj-msg" class="msg"></p>
+    </section>
+
+    <!-- =================== VIEW 3: MONITORAGGIO COLLABORATORI =================== -->
+    <section id="view-collaborators" class="view" hidden>
+        <h2>Monitoraggio Collaboratori</h2>
+        <div class="row">
+            <label for="collab-select">Collaboratore:</label>
+            <select id="collab-select"><option value="">Seleziona...</option></select>
+        </div>
+        <div id="collab-tables"></div>
+        <p id="collab-msg" class="msg"></p>
+    </section>
+
+    <!-- Context path esposto allo script per costruire le URL delle chiamate asincrone -->
+    <script>
+        window.APP_CONTEXT = window.location.pathname.replace(/\/homeManager$/, '/');
+    </script>
+    <script src="js/manager.js"></script>
+
+</body>
+</html>
