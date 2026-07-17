@@ -4,25 +4,15 @@
     <meta charset="UTF-8">
     <title>Home Collaboratore</title>
     <link rel="stylesheet" href="global.css" />
-    <style>
-        body { margin: 1.5rem; }
-        nav { margin-bottom: 0.5rem; }
-        table { border-collapse: collapse; margin-top: 1rem; margin-bottom: 1.5rem; }
-        th, td { border: 1px solid #ccc; padding: 6px 10px; text-align: center; min-width: 3rem; }
-        th { background-color: #f4f4f4; }
-        .wp-row td { background-color: #eee; font-weight: bold; text-align: left; }
-        .task-label { text-align: left; }
-        td.editable { cursor: pointer; background-color: #fbfbee; }
-        td.editable:hover { background-color: #f2f2c8; }
-        td.noedit { background-color: #fafafa; color: #bbb; }
-        td.editable input { width: 3.5rem; text-align: center; }
-        #projectList { list-style: none; padding-left: 0; }
-        #projectList li { margin: 0.25rem 0; }
-        #projectList a { text-decoration: none; }
-        #projectList a.active { font-weight: bold; text-decoration: underline; }
-        #errorMsg { color: #b00020; font-weight: bold; }
-        .hint { color: #666; font-size: 0.9rem; }
-    </style>
+    <link rel="stylesheet" href="collaborator.css" />
+
+    <!-- Caricamento deterministico: defer esegue gli script in ordine dopo il
+         parsing, cosi' TIW (utils.js) e' definito prima di collaborator.js. -->
+    <script>
+        window.APP_CONTEXT = window.location.pathname.replace(/\/homeCollaboratorJS$/, '/');
+    </script>
+    <script src="utils.js" defer></script>
+    <script src="collaborator.js" defer></script>
 </head>
 <body>
     <!-- Saluto con nome e cognome (riempito dal client dopo il caricamento dei dati) -->
@@ -50,10 +40,5 @@
     <!-- Tabella del progetto selezionato (mostrata lato client, senza ricaricare i dati) -->
     <section id="projectView"></section>
 
-    <!-- Context path esposto allo script per costruire le URL delle chiamate asincrone -->
-    <script>
-    window.APP_CONTEXT = window.location.pathname.replace(/\/homeCollaboratorJS$/, '/');
-</script>
-<script src="collaborator.js"></script>
 </body>
 </html>

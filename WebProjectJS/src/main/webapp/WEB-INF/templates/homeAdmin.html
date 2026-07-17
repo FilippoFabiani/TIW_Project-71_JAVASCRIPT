@@ -4,55 +4,86 @@
     <meta charset="UTF-8">
     <title>Home Amministratore</title>
     <link rel="stylesheet" href="global.css" />
-    <style>
-        body { margin: 1.5rem; }
-        nav { margin-bottom: 0.5rem; }
-        table { border-collapse: collapse; margin-top: 1rem; margin-bottom: 1.5rem; }
-        th, td { border: 1px solid #ccc; padding: 6px 10px; text-align: center; min-width: 3rem; }
-        th { background-color: #f4f4f4; }
-        .wp-row td { background-color: #eee; font-weight: bold; text-align: left; }
-        .task-label { text-align: left; }
-        td.editable { cursor: pointer; background-color: #fbfbee; }
-        td.editable:hover { background-color: #f2f2c8; }
-        td.noedit { background-color: #fafafa; color: #bbb; }
-        td.editable input { width: 3.5rem; text-align: center; }
-        #projectList { list-style: none; padding-left: 0; }
-        #projectList li { margin: 0.25rem 0; }
-        #projectList a { text-decoration: none; }
-        #projectList a.active { font-weight: bold; text-decoration: underline; }
-        #errorMsg { color: #b00020; font-weight: bold; }
-        .hint { color: #666; font-size: 0.9rem; }
-    </style>
+    <link rel="stylesheet" href="admin.css" />
+
+    <!-- Caricamento deterministico: defer esegue gli script in ordine dopo il
+         parsing, cosi' TIW (utils.js) e' definito prima di homeAdmin.js. -->
+    <script>
+        window.APP_CONTEXT = window.location.pathname.replace(/\/homeAdmin$/, '/');
+    </script>
+    <script src="utils.js" defer></script>
+    <script src="homeAdmin.js" defer></script>
 </head>
 <body>
-    <!-- Saluto con nome e cognome (riempito dal client dopo il caricamento dei dati) -->
-    <h1 id="greeting">Benvenuto</h1>
 
-<nav>
-    <a href="#" id="logoutBtn">Logout</a>
-</nav>
+    <header>
+        <h1 id="greeting">Home Amministratore</h1>
+        <nav id="mainNav">
+            <button type="button" data-view="view-builder" class="nav-btn active">Crea progetto</button>
+            <button type="button" data-view="view-verify" class="nav-btn">Verifica progetti</button>
+            <a href="#" id="logoutBtn">Logout</a>
+        </nav>
+    </header>
 
     <hr>
 
-    <p id="errorMsg"></p>
+    <!-- =================== VISTA 1: CREAZIONE PROGETTO =================== -->
+    <section id="view-builder" class="view">
+        <h2>Creazione progetto</h2>
 
-    <section>
-        <h2>I miei progetti</h2>
-        <p class="hint">Seleziona un progetto per vedere e modificare le ore lavorate. Clicca una
-            cella per editarla; il valore viene salvato automaticamente quando il puntatore esce
-            dalla cella.</p>
-        <ul id="projectList"></ul>
+        <!-- Form iniziale: crea il progetto (solo lato client) -->
+        <form id="np-form" action="#">
+            <fieldset>
+                <legend>Nuovo progetto</legend>
+                <div class="row">
+                    <label for="np-titolo">Titolo:</label>
+                    <input type="text" id="np-titolo" required>
+                </div>
+                <div class="row">
+                    <label for="np-durata">Durata (mesi):</label>
+                    <input type="number" id="np-durata" min="1" step="1" value="12" required>
+                </div>
+                <div class="row">
+                    <label for="np-responsabile">Responsabile:</label>
+                    <select id="np-responsabile"><option value="">-- responsabile --</option></select>
+                </div>
+                <div class="actions">
+                    <button type="button" id="btn-create-project">CREA PROGETTO</button>
+                </div>
+            </fieldset>
+        </form>
+
+        <!-- Toolbar: attiva quando esiste un progetto in costruzione -->
+        <div class="toolbar" id="builder-toolbar" hidden>
+            <button type="button" id="btn-undo" disabled>&#8630; Undo</button>
+            <button type="button" id="btn-redo" disabled>&#8631; Redo</button>
+            <button type="button" id="btn-save-all">SALVA</button>
+            <button type="button" id="btn-reset">Nuovo progetto</button>
+        </div>
+
+        <!-- Albero del progetto in costruzione (costruito lato client) -->
+        <div id="admin-tree"></div>
+
+        <p id="admin-msg" class="msg"></p>
     </section>
 
-    <hr>
+    <!-- =================== VISTA 2: VERIFICA PROGETTI =================== -->
+    <section id="view-verify" class="view" hidden>
+        <h2>Verifica progetti</h2>
 
-    <!-- Tabella del progetto selezionato (mostrata lato client, senza ricaricare i dati) -->
-    <section id="projectView"></section>
+        <!-- Struttura del progetto in costruzione (default) -->
+        <div id="verify-draft"></div>
 
-    <!-- Context path esposto allo script per costruire le URL delle chiamate asincrone -->
-    <script>
-    window.APP_CONTEXT = window.location.pathname.replace(/\/homeAdmin$/, '/');
-</script>
-<script src="homeAdmin.js"></script>
+        <hr>
+
+        <div class="row">
+            <label for="verify-select">Progetto salvato:</label>
+            <select id="verify-select"><option value="">Seleziona un progetto salvato...</option></select>
+        </div>
+        <div id="verify-struct"></div>
+
+        <p id="verify-msg" class="msg"></p>
+    </section>
+
 </body>
 </html>

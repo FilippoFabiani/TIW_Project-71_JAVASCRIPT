@@ -1,0 +1,8 @@
+/* =============================================================================
+ * Pagina di login (index.html) - aspetto grafico.
+ * loginManagement.js gestisce il comportamento (mostra/nasconde tramite la
+ * classe .hidden, senza scrivere stili inline).
+ * ========================================================================== */
+
+/* utilita' condivisa per mostrare/nascondere elementi via classe (non inline) */
+.hidden { display: none; }

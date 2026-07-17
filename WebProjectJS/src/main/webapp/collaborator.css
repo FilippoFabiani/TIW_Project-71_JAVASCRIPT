@@ -1,0 +1,35 @@
+/* =============================================================================
+ * Home Collaboratore - aspetto grafico (collaborator.js gestisce comportamento e
+ * costruzione del DOM; qui solo la presentazione).
+ * ========================================================================== */
+
+body { margin: 1.5rem; }
+nav { margin-bottom: 0.5rem; }
+
+/* tabella delle ore lavorate */
+table { border-collapse: collapse; margin-top: 1rem; margin-bottom: 1.5rem; }
+th, td {
+    border: 1px solid #ccc;
+    padding: 6px 10px;
+    text-align: center;
+    min-width: 3rem;
+}
+th { background-color: #f4f4f4; }
+.wp-row td { background-color: #eee; font-weight: bold; text-align: left; }
+.task-label { text-align: left; }
+
+/* celle: editabili e non */
+td.editable { cursor: pointer; background-color: #fbfbee; }
+td.editable:hover { background-color: #f2f2c8; }
+td.noedit { background-color: #fafafa; color: #bbb; }
+td.editable input { width: 3.5rem; text-align: center; }
+
+/* elenco dei progetti */
+#projectList { list-style: none; padding-left: 0; }
+#projectList li { margin: 0.25rem 0; }
+#projectList a { text-decoration: none; }
+#projectList a.active { font-weight: bold; text-decoration: underline; }
+
+/* messaggi */
+#errorMsg { color: #b00020; font-weight: bold; }
+.hint { color: #666; font-size: 0.9rem; }

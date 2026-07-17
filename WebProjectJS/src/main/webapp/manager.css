@@ -1,0 +1,59 @@
+/* =============================================================================
+ * Home Responsabile - aspetto grafico (manager.js costruisce il DOM, questo file
+ * ne definisce solo la presentazione). Regole di base condivise in global.css.
+ * ========================================================================== */
+
+body { margin: 1.5rem; }
+header h1 { margin-bottom: 0.25rem; }
+
+/* barra di navigazione tra le viste */
+#mainNav { margin: 0.5rem 0; }
+#mainNav .nav-btn {
+    margin-right: 0.4rem;
+    padding: 0.4rem 0.8rem;
+    cursor: pointer;
+    border: 1px solid #bbb;
+    background: #f4f4f4;
+    border-radius: 4px;
+}
+#mainNav .nav-btn.active { background: #06c; color: #fff; border-color: #06c; }
+#mainNav a { margin-left: 0.6rem; }
+
+/* viste e righe di controlli */
+.view { margin-top: 1rem; }
+.view .row { margin: 0.5rem 0; }
+.view .row label { margin-right: 0.3rem; margin-left: 0.8rem; }
+.view .row label:first-child { margin-left: 0; }
+
+/* pulsantiere di azione */
+.actions { margin: 1rem 0; }
+.actions button {
+    padding: 0.5rem 1rem;
+    margin-right: 0.5rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+}
+#btn-save { background: #06c; }
+#btn-assign, #btn-conclude { background: #0a5; }
+
+/* tabelle a griglia */
+table.grid { border-collapse: collapse; margin-top: 0.75rem; }
+table.grid th, table.grid td {
+    border: 1px solid #ccc;
+    padding: 5px 9px;
+    text-align: center;
+    min-width: 3rem;
+}
+table.grid th { background: #f4f4f4; }
+table.grid .wp-row td { background: #eee; font-weight: bold; text-align: left; }
+table.grid .task-label { text-align: left; }
+
+/* messaggi e dettaglio */
+.muted { color: #666; }
+.msg { min-height: 1.2em; margin-top: 0.6rem; }
+.msg-ok { color: #14670a; }
+.msg-err { color: #b00020; font-weight: bold; }
+#home-detail label { display: inline-block; margin: 0.15rem 0; }
+#home-detail input[type=number] { width: 4rem; }

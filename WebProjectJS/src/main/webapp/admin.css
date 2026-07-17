@@ -1,0 +1,100 @@
+/* =============================================================================
+ * Home Amministratore - aspetto grafico (homeAdmin.js gestisce comportamento,
+ * costruzione del progetto, undo/redo e drag&drop; qui solo la presentazione).
+ * ========================================================================== */
+
+body { margin: 1.5rem; }
+header h1 { margin-bottom: 0.25rem; }
+
+/* barra di navigazione tra le viste */
+#mainNav { margin: 0.5rem 0; }
+#mainNav .nav-btn {
+    margin-right: 0.4rem;
+    padding: 0.4rem 0.8rem;
+    cursor: pointer;
+    border: 1px solid #bbb;
+    background: #f4f4f4;
+    border-radius: 4px;
+}
+#mainNav .nav-btn.active { background: #06c; color: #fff; border-color: #06c; }
+#mainNav a { margin-left: 0.6rem; }
+
+/* viste, righe e form */
+.view { margin-top: 1rem; }
+.row { margin: 0.5rem 0; }
+.row label { margin-right: 0.3rem; }
+
+fieldset { border: 1px solid #ccc; border-radius: 6px; padding: 0.8rem 1rem; max-width: 640px; }
+legend { font-weight: bold; }
+input[type=text], input[type=number], select { padding: 0.3rem; }
+input[type=number] { width: 5rem; }
+
+/* pulsantiere e toolbar */
+.actions button, .toolbar button {
+    padding: 0.45rem 0.9rem;
+    margin-right: 0.5rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+}
+#btn-create-project { background: #06c; }
+#btn-save-all { background: #0a5; }
+#btn-undo, #btn-redo, #btn-reset { background: #666; }
+.toolbar button:disabled { opacity: 0.45; cursor: default; }
+.toolbar { margin: 0.8rem 0; }
+
+/* albero di costruzione del progetto */
+#admin-tree { margin-top: 1rem; }
+.proj-header {
+    padding: 0.5rem 0.6rem;
+    background: #eef4ff;
+    border: 1px solid #cfe0ff;
+    border-radius: 4px;
+}
+ul.wp-list { list-style: none; padding-left: 0; }
+li.wp-item {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 0.6rem 0;
+    padding: 0.5rem 0.7rem;
+    background: #fafafa;
+}
+li.wp-item .wp-row { font-size: 1rem; }
+ul.task-list { list-style: none; padding-left: 1.4rem; margin: 0.4rem 0 0; min-height: 1.4rem; }
+li.task-item {
+    margin: 0.25rem 0;
+    padding: 0.2rem 0.4rem;
+    background: #fff;
+    border: 1px dashed #ccc;
+    border-radius: 4px;
+    cursor: grab;
+}
+li.task-item .grip { color: #999; cursor: grab; }
+
+/* campi editabili inline */
+.js-edit { cursor: pointer; border-bottom: 1px dotted #06c; color: #06c; padding: 0 2px; }
+.js-edit:hover { background: #eef; }
+.edit-control { padding: 0.15rem 0.3rem; }
+
+/* bottoni + / - dell'albero */
+.tree-btn {
+    margin-left: 0.35rem;
+    padding: 0.1rem 0.5rem;
+    cursor: pointer;
+    border: 1px solid #bbb;
+    background: #f0f0f0;
+    border-radius: 4px;
+    color: #333;
+}
+.tree-btn.btn-del { color: #b00020; border-color: #e0a; }
+
+/* verifica progetti */
+ul.verify-tree { line-height: 1.5rem; }
+ul.verify-tree > li { margin: 0.4rem 0; }
+
+/* messaggi */
+.muted { color: #666; }
+.msg { min-height: 1.2em; margin-top: 0.6rem; }
+.msg-ok { color: #14670a; }
+.msg-err { color: #b00020; font-weight: bold; }
