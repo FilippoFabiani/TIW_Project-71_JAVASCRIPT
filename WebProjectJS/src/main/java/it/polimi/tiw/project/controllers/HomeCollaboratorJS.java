@@ -2,8 +2,6 @@ package it.polimi.tiw.project.controllers;
 
 import java.io.IOException;
 
-import org.thymeleaf.context.WebContext;
-
 import it.polimi.tiw.project.beans.Position;
 import it.polimi.tiw.project.beans.User;
 import jakarta.servlet.ServletException;

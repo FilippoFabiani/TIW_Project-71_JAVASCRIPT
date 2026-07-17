@@ -28,10 +28,9 @@
     <!-- Saluto con nome e cognome (riempito dal client dopo il caricamento dei dati) -->
     <h1 id="greeting">Benvenuto</h1>
 
-    <nav>
-        <!-- La HOME COLLABORATORE e' un'unica pagina: l'unico link richiesto e' il LOGOUT. -->
-        <a href="@{/Logout}">Logout</a>
-    </nav>
+<nav>
+    <a href="#" id="logoutBtn">Logout</a>
+</nav>
 
     <hr>
 
@@ -52,8 +51,8 @@
 
     <!-- Context path esposto allo script per costruire le URL delle chiamate asincrone -->
     <script>
-    window.APP_CONTEXT = window.location.pathname.replace(/\/homeCollaboratorJS$/, '/');
+    window.APP_CONTEXT = window.location.pathname.replace(/\/homeAdmin$/, '/');
 </script>
-<script src="js/collaborator.js"></script>
+<script src="homeAdmin.js"></script>
 </body>
 </html>

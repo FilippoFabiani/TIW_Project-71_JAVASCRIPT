@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebServlet("/HomeAdmin")
+@WebServlet("/homeAdmin")
 @MultipartConfig
 public class HomeAdmin extends MyServlet {
     private static final long serialVersionUID = 1L;

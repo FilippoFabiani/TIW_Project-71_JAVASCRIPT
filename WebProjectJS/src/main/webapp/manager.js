@@ -556,5 +556,21 @@ function renderCollaboratorMonitoring(data) {
     });
 }
 
+/* ============================================================== */
+/*  LOGOUT                                                          */
+/* ============================================================== */
+var logoutBtn = document.getElementById("logoutBtn");
+if (logoutBtn) {
+    logoutBtn.addEventListener("click", function (e) {
+        e.preventDefault(); // Impedisce al browser di seguire il link "#"
+        
+        // Svuota la memoria del browser (username, position, ecc.)
+        sessionStorage.clear(); 
+        
+        // Reindirizza alla Servlet che distruggerà la sessione Java e caricherà index.html
+        window.location.href = "Logout"; 
+    });
+}
+
 /* ----------------------- avvio ----------------------- */
 showView("view-home");
