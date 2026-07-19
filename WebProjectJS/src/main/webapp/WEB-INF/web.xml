@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://jakarta.ee/xml/ns/jakartaee" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd" id="WebApp_ID" version="6.0">
   <display-name>WebProjectJS</display-name>
+
+  <!-- Cartella locale (esterna alla webapp) con le foto dei tecnici: idTecnico.jpg.
+       Il servlet Photo (/photo) legge le immagini da qui. Modificare il valore se
+       la cartella si trova altrove. -->
+  <context-param>
+    <param-name>photosDirectory</param-name>
+    <param-value>/Users/Federico/Desktop/lezioni/Tecnologie per il web/PROGETTO/immagini</param-value>
+  </context-param>
+
   <resource-ref>
     <res-ref-name>jdbc/dbProvaTiw</res-ref-name>
     <res-type>javax.sql.DataSource</res-type>

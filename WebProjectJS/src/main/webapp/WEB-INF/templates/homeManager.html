@@ -18,7 +18,11 @@
 <body>
 
     <header>
-        <h1 id="greeting">Home Responsabile</h1>
+        <!-- Saluto + foto del responsabile (foto resa visibile dal client se presente) -->
+        <div class="welcome">
+            <img id="userPhoto" class="avatar" alt="Foto del responsabile" hidden>
+            <h1 id="greeting">Home Responsabile</h1>
+        </div>
         <nav id="mainNav">
             <button type="button" data-view="view-home" class="nav-btn active">Home Responsabile</button>
             <button type="button" data-view="view-projects" class="nav-btn">Monitoraggio Progetti</button>

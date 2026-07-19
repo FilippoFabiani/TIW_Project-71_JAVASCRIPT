@@ -55,6 +55,9 @@ public class GetCollaboratorData extends MyServlet {
 			CollaboratorDAO dao = new CollaboratorDAO(connection);
 			CollaboratorBoard board = dao.findBoard(user.getId());
 
+			// solo l'URL leggero: il browser scarichera' l'immagine a parte da /photo
+			board.setPhotoUrl("photo?id=" + user.getId());
+
 			String json = new Gson().toJson(board);
 			response.setStatus(HttpServletResponse.SC_OK);
 			response.getWriter().write(json);

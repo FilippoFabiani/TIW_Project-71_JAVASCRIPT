@@ -11,7 +11,6 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 
-import it.polimi.tiw.project.beans.AdminDtos;
 import it.polimi.tiw.project.beans.AdminDtos.SaveProjectRequest;
 import it.polimi.tiw.project.beans.AdminDtos.TaskReq;
 import it.polimi.tiw.project.beans.AdminDtos.WpReq;

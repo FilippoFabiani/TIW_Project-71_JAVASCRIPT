@@ -52,6 +52,7 @@ public class CheckLogin extends MyServlet{
 				credential = new UserCredential(usrn, pwd);
 				user = userDAO.checkCredential(credential);
 				
+				
 			} catch (SQLException e) {
 				// TODO manage exception, creating an handling servlet
 				response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);

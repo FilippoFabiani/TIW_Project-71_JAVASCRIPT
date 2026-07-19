@@ -77,6 +77,15 @@ public class GetManagerData extends MyServlet {
 
 			switch (resource) {
 
+			case "me": {
+				// profilo del responsabile per il saluto: nome, cognome e URL leggero della foto
+				User me = dao.findTechnician(user.getId());
+				String name = (me != null) ? me.getName() : null;
+				String surname = (me != null) ? me.getSurname() : null;
+				writeOk(response, new ProfileDTO(name, surname, "photo?id=" + user.getId()));
+				return;
+			}
+
 			case "projects": {
 				List<ProjectDTO> out = new ArrayList<>();
 				for (Project p : dao.findManagerProjects(user.getId()))
@@ -194,5 +203,18 @@ public class GetManagerData extends MyServlet {
 	private void writeError(HttpServletResponse response, int status, String message) throws IOException {
 		response.setStatus(status);
 		response.getWriter().write("{\"error\":\"" + message + "\"}");
+	}
+
+	/** payload della risorsa "me": saluto personalizzato + URL leggero della foto */
+	private static class ProfileDTO {
+		@SuppressWarnings("unused") final String name;
+		@SuppressWarnings("unused") final String surname;
+		@SuppressWarnings("unused") final String photoUrl;
+
+		ProfileDTO(String name, String surname, String photoUrl) {
+			this.name = name;
+			this.surname = surname;
+			this.photoUrl = photoUrl;
+		}
 	}
 }

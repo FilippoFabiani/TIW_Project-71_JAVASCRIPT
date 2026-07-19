@@ -15,8 +15,13 @@
     <script src="collaborator.js" defer></script>
 </head>
 <body>
-    <!-- Saluto con nome e cognome (riempito dal client dopo il caricamento dei dati) -->
-    <h1 id="greeting">Benvenuto</h1>
+    <!-- Saluto con nome e cognome + foto del tecnico (riempiti dal client dopo il
+         caricamento dei dati). L'immagine e' inizialmente nascosta e resa visibile
+         solo se disponibile. -->
+    <div class="welcome">
+        <img id="userPhoto" class="avatar" alt="Foto del collaboratore" hidden>
+        <h1 id="greeting">Benvenuto</h1>
+    </div>
 
     <nav>
         <!-- La HOME COLLABORATORE e' un'unica pagina: l'unico link richiesto e' il LOGOUT. -->

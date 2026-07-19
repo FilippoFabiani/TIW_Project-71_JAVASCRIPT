@@ -52,11 +52,56 @@ public class UserCredentialDAO extends DAO {
 
 						user.setId(id);
 						user.setPosition(setIfTechProfile(id, position));
+						user.setUsername(credential.getUsername());
+						
+						if(!position.equals(Position.ADMIN)) {
+							User tech = setTechParam(id);
+							user.setName(tech.getName());
+							user.setSurname(tech.getSurname());
+							user.setPhotoPath(tech.getPhotoPath());
+						}
+						
 						return user;
 					}
 				}
 			}
 		}
+		
+		private User setTechParam(int id) throws SQLException {
+			User tech = new User();
+			
+			String query = """
+					
+					SELECT nome, cognome, foto
+					FROM Tecnico
+					WHERE id = ?
+					
+					""";
+
+			try (PreparedStatement pstatement = connection.prepareStatement(query)) {
+				pstatement.setInt(1, id);
+				
+				try(ResultSet result = pstatement.executeQuery()){
+					if (!result.isBeforeFirst()) {
+						// this credentials are not valid
+						// TODO gestire con codice di errore ma senza eccezione (?)
+						return null;}
+					else {
+						result.next();
+						
+						tech.setName(result.getString("nome"));
+						tech.setSurname(result.getString("cognome"));
+						tech.setPhotoPath(result.getString("foto"));
+						
+						return tech;
+					}
+				
+				}
+			}
+		}
+		
+			
+		
 
 		/**
 		 * This method is used to determine which tech profile the user has, based on

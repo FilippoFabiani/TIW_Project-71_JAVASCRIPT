@@ -30,6 +30,8 @@ import java.util.List;
 public class CollaboratorBoard {
 
 	private String collaboratorName;
+	/** URL leggero della foto del collaboratore (es. "photo?id=3"); i byte NON viaggiano nel JSON */
+	private String photoUrl;
 	private List<ProjectBoard> projects;
 
 	public String getCollaboratorName() {
@@ -38,6 +40,14 @@ public class CollaboratorBoard {
 
 	public void setCollaboratorName(String collaboratorName) {
 		this.collaboratorName = collaboratorName;
+	}
+
+	public String getPhotoUrl() {
+		return photoUrl;
+	}
+
+	public void setPhotoUrl(String photoUrl) {
+		this.photoUrl = photoUrl;
 	}
 
 	public List<ProjectBoard> getProjects() {

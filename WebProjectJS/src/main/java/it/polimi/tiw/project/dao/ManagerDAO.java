@@ -62,6 +62,23 @@ public class ManagerDAO extends DAO {
 		return projects;
 	}
 
+	/** profilo (nome, cognome) del tecnico corrente, per il saluto della HOME; null se non trovato */
+	public User findTechnician(int id) throws SQLException {
+		String query = "SELECT nome, cognome FROM Tecnico WHERE id = ?";
+		try (PreparedStatement ps = connection.prepareStatement(query)) {
+			ps.setInt(1, id);
+			try (ResultSet rs = ps.executeQuery()) {
+				if (!rs.next())
+					return null;
+				User u = new User();
+				u.setId(id);
+				u.setName(rs.getString("nome"));
+				u.setSurname(rs.getString("cognome"));
+				return u;
+			}
+		}
+	}
+
 	/** true se il progetto esiste ed appartiene (come responsabile) all'utente dato */
 	public boolean isManagerOf(int managerId, String progetto) throws SQLException {
 		String query = "SELECT 1 FROM Progetto WHERE titolo = ? AND responsabile = ?";
