@@ -83,7 +83,6 @@
     class AdminApi {
         constructor(ctx) {
             this.ctx = ctx || "/";
-            this.loginUrl = this.ctx + "login";
             this.http = new TIW.Http();
         }
         urlFor(resource, params) {
@@ -102,7 +101,6 @@
                 method: "GET",
                 url: this.urlFor(resource, params),
                 headers: { "Accept": "application/json" },
-                onUnauthorized: function() { window.location.href = self.loginUrl; },
                 onSuccess: function(data) { onOk(data); },
                 onError: function(message) { if (onErr) { onErr(message); } }
             });
@@ -129,7 +127,6 @@
                 url: this.ctx + "AdminActionJS",
                 headers: { "Content-Type": "application/json;charset=UTF-8" },
                 body: JSON.stringify(payload),
-                onUnauthorized: function() { window.location.href = self.loginUrl; },
                 onSuccess: function(data) { onOk(data); },
                 onError: function(message) { if (onErr) { onErr(message); } }
             });

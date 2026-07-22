@@ -25,6 +25,11 @@
             this.loginForm = document.getElementById("loginForm");
             this.roleChoice = document.getElementById("roleChoice");
             this.errorMessage = document.getElementById("errormessage");
+			// Messaggio propagato da una pagina protetta (accesso negato / sessione scaduta).
+			        var msg = new URLSearchParams(window.location.search).get("msg");
+			        if (msg) {
+			            this.errorMessage.textContent = msg;
+			        }
             this.loginButton = document.getElementById("loginbutton");
 
             /* bottoni della scelta ruolo: creati dinamicamente, riferimenti a null. */

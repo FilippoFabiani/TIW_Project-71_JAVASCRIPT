@@ -117,6 +117,19 @@ TIW.dom = {
 };
 
 /* ========================================================================== *
+ *  TIW.goToLogin - ritorno alla pagina di login mostrando un messaggio        *
+ * ========================================================================== */
+TIW.goToLogin = function (message) {
+    var ctx = window.APP_CONTEXT || "/";
+    sessionStorage.clear();                 // nessuno stato utente residuo
+    var url = ctx + "index.html";
+    if (message) {
+        url += "?msg=" + encodeURIComponent(message);
+    }
+    window.location.href = url;
+};
+
+/* ========================================================================== *
  *  TIW.Http - "classe" che incapsula una chiamata asincrona (XHR + JSON)       *
  * ========================================================================== *
  *
@@ -160,21 +173,34 @@ TIW.Http.prototype.request = function (options) {
             data = null;
         }
 
-        if (req.status === 401 && typeof options.onUnauthorized === "function") {
-            options.onUnauthorized(req);
-            return;
-        }
+		var message = (data && data.error)
+		            ? data.error
+		            : (req.responseText || ("Errore " + req.status));
 
-        if (req.status >= 200 && req.status < 300) {
-            if (typeof options.onSuccess === "function") {
-                options.onSuccess(data, req);
-            }
-        } else if (typeof options.onError === "function") {
-            var message = (data && data.error)
-                ? data.error
-                : (req.responseText || ("Errore " + req.status));
-            options.onError(message, req);
-        }
+		        // Stati che richiedono un nuovo login:
+		        //   - 401: sessione assente o scaduta;
+		        //   - 403 con flag "reauth": ruolo non abilitato all'intera sezione.
+		        // I 403 "di risorsa" (es. progetto non tuo) NON hanno il flag e
+		        // restano messaggi in pagina.
+		        var mustReauth = (req.status === 401) ||
+		            (req.status === 403 && data && data.reauth === true);
+
+		        if (mustReauth) {
+		            if (typeof options.onUnauthorized === "function") {
+		                options.onUnauthorized(req);   // hook opzionale, retrocompatibile
+		            } else {
+		                TIW.goToLogin(message);        // default: torna al login col messaggio
+		            }
+		            return;
+		        }
+
+		        if (req.status >= 200 && req.status < 300) {
+		            if (typeof options.onSuccess === "function") {
+		                options.onSuccess(data, req);
+		            }
+		        } else if (typeof options.onError === "function") {
+		            options.onError(message, req);
+		        }
     };
 
     req.send(options.body !== undefined && options.body !== null ? options.body : null);

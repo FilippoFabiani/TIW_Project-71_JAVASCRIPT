@@ -54,8 +54,8 @@ public class GetAdminData extends MyServlet {
             return;
         }
         if (!Position.ADMIN.equals(user.getPosition())) {
-            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-            response.getWriter().write("{\"error\":\"Accesso negato\"}");
+        	response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            response.getWriter().write("{\"error\":\"Accesso negato: profilo di amministratore richiesto.\",\"reauth\":true}");
             return;
         }
 

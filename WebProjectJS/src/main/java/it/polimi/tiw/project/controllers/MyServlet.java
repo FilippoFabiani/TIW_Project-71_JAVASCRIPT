@@ -28,4 +28,12 @@ public abstract class MyServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		}
+	
+	protected String loginRedirect(jakarta.servlet.http.HttpServletRequest request, String message) {
+        String url = request.getContextPath() + "/index.html";
+        if (message != null && !message.isEmpty()) {
+            url += "?msg=" + java.net.URLEncoder.encode(message, java.nio.charset.StandardCharsets.UTF_8);
+        }
+        return url;
+    }
 }

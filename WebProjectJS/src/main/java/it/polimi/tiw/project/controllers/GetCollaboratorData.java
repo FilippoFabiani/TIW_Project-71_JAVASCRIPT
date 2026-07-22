@@ -47,7 +47,7 @@ public class GetCollaboratorData extends MyServlet {
 		Position position = user.getPosition();
 		if (!Position.COLLABORATOR.equals(position) && !Position.TECHNICIAN.equals(position)) {
 			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-			response.getWriter().write("{\"error\":\"Accesso negato\"}");
+			response.getWriter().write("{\"error\":\"Accesso negato: profilo di collaboratore richiesto.\",\"reauth\":true}");
 			return;
 		}
 

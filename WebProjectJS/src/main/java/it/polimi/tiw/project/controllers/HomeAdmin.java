@@ -22,13 +22,13 @@ public class HomeAdmin extends MyServlet {
 
         HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute("user") == null) {
-            response.sendRedirect(request.getContextPath() + "/index.html");   // redirect di sicurezza
+            response.sendRedirect(loginRedirect(request, "Devi effettuare l'accesso."));
             return;
         }
         User user = (User) session.getAttribute("user");
         Position p = user.getPosition();
         if (!p.equals(Position.ADMIN)) {
-            response.sendError(HttpServletResponse.SC_FORBIDDEN, "Accesso negato: profilo di amministratore richiesto.");
+            response.sendRedirect(loginRedirect(request, "Accesso negato: profilo di amministratore richiesto."));
             return;
         }
         response.setContentType("text/html;charset=UTF-8");

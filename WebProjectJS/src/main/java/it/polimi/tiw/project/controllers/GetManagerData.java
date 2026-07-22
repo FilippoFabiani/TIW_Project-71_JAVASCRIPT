@@ -56,7 +56,7 @@ public class GetManagerData extends MyServlet {
 		Position position = user.getPosition();
 		if (!Position.MANAGER.equals(position) && !Position.TECHNICIAN.equals(position)) {
 			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-			response.getWriter().write("{\"error\":\"Accesso negato\"}");
+			response.getWriter().write("{\"error\":\"Accesso negato: profilo di responsabile richiesto.\",\"reauth\":true}");
 			return;
 		}
 

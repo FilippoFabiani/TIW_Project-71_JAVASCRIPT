@@ -30,14 +30,13 @@ public class HomeCollaboratorJS extends MyServlet {
 
 		HttpSession session = request.getSession(false);
 		if (session == null || session.getAttribute("user") == null) {
-			response.sendRedirect(request.getContextPath() + "/login");
+			response.sendRedirect(loginRedirect(request, "Devi effettuare l'accesso."));
 			return;
 		}
-
 		User user = (User) session.getAttribute("user");
 		Position position = user.getPosition();
 		if (!Position.COLLABORATOR.equals(position) && !Position.TECHNICIAN.equals(position)) {
-			response.sendError(HttpServletResponse.SC_FORBIDDEN, "Accesso negato: profilo di collaboratore richiesto.");
+			response.sendRedirect(loginRedirect(request, "Accesso negato: profilo di collaboratore richiesto."));
 			return;
 		}
 

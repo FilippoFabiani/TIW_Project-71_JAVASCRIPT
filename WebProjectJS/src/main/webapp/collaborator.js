@@ -43,7 +43,6 @@
      * ====================================================================== */
     function CollaboratorApi(ctx) {
         this.ctx = ctx || "/";
-        this.loginUrl = this.ctx + "login";
         this.http = new TIW.Http();
     }
 
@@ -54,7 +53,6 @@
             method: "GET",
             url: this.ctx + "GetCollaboratorData",
             headers: { "Accept": "application/json" },
-            onUnauthorized: function () { window.location.href = self.loginUrl; },
             onSuccess: function (data) { onOk(data); },
             onError: function (message) { if (onErr) { onErr(message); } }
         });
@@ -75,7 +73,6 @@
             url: this.ctx + "UpdateWorkedHoursJS",
             headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" },
             body: dom.encodeParams(pairs),
-            onUnauthorized: function () { window.location.href = self.loginUrl; },
             onSuccess: function (data) { onOk(data); },
             onError: function (message) { if (onErr) { onErr(message); } }
         });

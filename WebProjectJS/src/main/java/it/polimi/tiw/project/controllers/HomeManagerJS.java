@@ -32,14 +32,13 @@ public class HomeManagerJS extends MyServlet {
 
 		HttpSession session = request.getSession(false);
 		if (session == null || session.getAttribute("user") == null) {
-			response.sendRedirect(request.getContextPath() + "/login");
+			response.sendRedirect(loginRedirect(request, "Devi effettuare l'accesso."));
 			return;
 		}
-
 		User user = (User) session.getAttribute("user");
 		Position position = user.getPosition();
 		if (!Position.MANAGER.equals(position) && !Position.TECHNICIAN.equals(position)) {
-			response.sendError(HttpServletResponse.SC_FORBIDDEN, "Accesso negato: profilo di responsabile richiesto.");
+			response.sendRedirect(loginRedirect(request, "Accesso negato: profilo di responsabile richiesto."));
 			return;
 		}
 
